@@ -1,3 +1,10 @@
+/*
+ * Autor: Grzegorz Wszoła
+ * Grupa: Czw/P 17:05
+ * Temat: Lab 2
+ * Data: 17 listopada 2023r
+*/
+
 #include<stdio.h>
 #include<conio.h>
 #include<math.h>
@@ -9,7 +16,9 @@ void liczbyLosowe();
 void szachownica();
 
 int main() {
-
+    printf("Autor: Grzegorz Wszoła\n\n");
+    system("pause");
+    system("cls");
     bool petla = true;
     char wybor,
     tab_s[6/*ilosc stringow*/][43/*dlugosc najdluzszego stringa*/] =
