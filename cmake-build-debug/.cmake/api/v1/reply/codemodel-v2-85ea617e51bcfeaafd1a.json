@@ -49,8 +49,8 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "C:/Users/grzes/CLionProjects/Lab2/cmake-build-debug",
-		"source" : "C:/Users/grzes/CLionProjects/Lab2"
+		"build" : "D:/Programownie/Lab_2/cmake-build-debug",
+		"source" : "D:/Programownie/Lab_2"
 	},
 	"version" : 
 	{

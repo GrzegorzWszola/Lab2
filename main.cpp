@@ -1,6 +1,7 @@
 #include<stdio.h>
 #include<conio.h>
 #include<math.h>
+#include<time.h>
 
 void tabliczkaMnozenia();
 void sumaCyfr();
@@ -8,6 +9,7 @@ void liczbyLosowe();
 void szachownica();
 
 int main() {
+
     bool petla = true;
     char wybor,
     tab_s[6/*ilosc stringow*/][43/*dlugosc najdluzszego stringa*/] =
@@ -80,7 +82,6 @@ int main() {
             petla = false;
         }
     }
-
     return 0;
 }
 
@@ -118,6 +119,117 @@ void tabliczkaMnozenia(){
     }
 }
 
-void sumaCyfr(){}
-void liczbyLosowe(){}
-void szachownica(){}
+void sumaCyfr(){
+    unsigned long liczba;
+    int cyfra, suma = 0;
+    printf("Wprowadz duza liczbe calkowita dodatnia: ");
+    scanf("%lu", &liczba);
+
+    if(liczba < 0 || liczba > 4294967295){
+        printf("Niepoprawne dane");
+    } else {
+        while(liczba != 0){
+            cyfra = liczba%10;
+            suma += cyfra;
+            liczba /= 10;
+        }
+    }
+    printf("Suma cyfr tej liczby to: %d", suma);
+}
+
+void liczbyLosowe(){
+    int min, max, ile, losowa, ile_dod, ile_uj, suma_dod, suma_uj;
+    float srednia_dod, srednia_uj;
+    system("cls");
+    printf("Podaj przedzial liczb losowych\n");
+    printf("od: "); scanf("%d", &min);
+    printf("do: "); scanf("%d", &max);
+    printf("ilosc liczb losowych: "); scanf("%d", &ile);
+    srand(time(NULL));
+    printf("\n");
+
+    suma_dod = 0;
+    suma_uj = 0;
+    ile_dod = 0;
+    ile_uj = 0;
+    for(int i = 1; i <= ile; i++){
+        losowa = min + rand()%(max - min + 1);
+        if(losowa > 0){
+            suma_dod += losowa;
+            ile_dod += 1;
+            printf("liczba: %d, suma dodatnich: %d, ile dodatnich: %d\n", losowa, suma_dod, ile_dod);
+        } else if(losowa < 0) {
+            suma_uj += losowa;
+            ile_uj += 1;
+            printf("liczba: %d, suma ujemnych: %d, ile ujemnych: %d\n", losowa, suma_uj, ile_uj);
+        } else {
+            printf("liczba: 0\n");
+            continue;
+        }
+    }
+
+    if(ile_uj == 0){
+        srednia_dod = suma_dod/ile_dod;
+        printf("\n\nLiczb dodatnich bylo: %d\nLiczb ujemnych bylo: %d\nSrednia liczb dodatnich: %.2f\nSrednia liczb ujemnych: 0",
+               ile_dod, ile_uj, srednia_dod);
+    } else if(ile_dod == 0){
+        srednia_uj = suma_uj/ile_uj;
+        printf("\n\nLiczb dodatnich bylo: %d\nLiczb ujemnych bylo: %d\nSrednia liczb dodatnich: 0\nSrednia liczb ujemnych: %.2f",
+               ile_dod, ile_uj, srednia_uj);
+    } else {
+        srednia_dod = suma_dod/ile_dod;
+        srednia_uj = suma_uj/ile_uj;
+        printf("\n\nLiczb dodatnich bylo: %d\nLiczb ujemnych bylo: %d\nSrednia liczb dodatnich: %.2f\nSrednia liczb ujemnych: %.2f",
+               ile_dod, ile_uj, srednia_dod, srednia_uj);
+    }
+    printf("\n\n");
+}
+
+void szachownica(){
+    int pole_s, pole_w, szachownica_s, szachownica_w;
+    system("cls");
+    printf("Podaj wymiary jednego pola szachownicy\n");
+    printf("Wysokosc: "); scanf("%d", &pole_w);
+    printf("Szerokosc: "); scanf("%d", &pole_s);
+    printf("\nPodaj wymiary szachownicy\n");
+    printf("Wysokosc: "); scanf("%d", &szachownica_w);
+    printf("Szerokosc: "); scanf("%d", &szachownica_s);
+
+    if(pole_s < 0 || pole_w < 0 || szachownica_s < 0 || szachownica_w < 0) {
+        printf("Wartosci nie moga byc ujemne!!!");
+    } else {
+        goto start;
+    }
+
+    start:
+    for(int a = 0; a < szachownica_w; a++){
+        if(a%2 == 0){
+            for(int b = 0; b < pole_w; b++){
+                printf("\n");
+                for(int i = 0; i < szachownica_s; i+=2){
+                    for(int j = 0; j < pole_s; j++){
+                        printf("\033[32m#");
+                    }
+                    for(int k = 0; k < pole_s; k++){
+                        printf("\033[31m#");
+                    }
+                }
+            }
+        } else {
+            for(int b = 0; b < pole_w; b++){
+                printf("\n");
+                for(int i = 0; i < szachownica_s; i+=2){
+                    for(int j = 0; j < pole_s; j++){
+                        printf("\033[31m#");
+                    }
+                    for(int k = 0; k < pole_s; k++){
+                        printf("\033[32m#");
+                    }
+                }
+            }
+        }
+    }
+
+    printf("\033[0m");
+    printf("\n\n");
+}
